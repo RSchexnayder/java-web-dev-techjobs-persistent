@@ -33,13 +33,24 @@ public class JobData {
             results = findByValue(value, allJobs);
             return results;
         }
-        for (Job job : allJobs) {
 
-            String aValue = getFieldValue(job, column);
-
-            if (aValue != null && aValue.toLowerCase().contains(value.toLowerCase())) {
-                results.add(job);
+        if (column.toLowerCase().equals("skills")){
+            for (Job aJob : allJobs){
+                for (Skill skill: aJob.getSkills()){
+                    if (skill.getName().toLowerCase().equals(value.toLowerCase())){
+                        results.add(aJob);
+                    }
+                }
+              }
+            return results;
+            } else {
+                for (Job job : allJobs) {
+                    String aValue = getFieldValue(job, column);
+                        if (aValue != null && aValue.toLowerCase().contains(value.toLowerCase())) {
+                            results.add(job);
+                }
             }
+
         }
 
         return results;

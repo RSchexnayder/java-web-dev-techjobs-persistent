@@ -1,7 +1,7 @@
 package org.launchcode.javawebdevtechjobspersistent.controllers;
 
 import org.launchcode.javawebdevtechjobspersistent.models.Employer;
-import org.launchcode.javawebdevtechjobspersistent.models.EmployerRepository;
+import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,6 +40,14 @@ public class EmployerController {
             return "employers/add";
         }
 
+//        List<String> employerNames = newEmployer.getEmployerNames();
+//
+//
+//        if (employerNames.size() > 0){
+//            if(employerNames.contains(newEmployer.getName())){
+//            return "add";
+//         }
+//        }
             employerRepository.save(newEmployer);
         return "redirect:";
     }
