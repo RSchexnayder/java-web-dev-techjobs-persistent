@@ -40,15 +40,15 @@ public class EmployerController {
             return "employers/add";
         }
 
-//        List<String> employerNames = newEmployer.getEmployerNames();
-//
-//
-//        if (employerNames.size() > 0){
-//            if(employerNames.contains(newEmployer.getName())){
-//            return "add";
-//         }
-//        }
+        if (newEmployer.isUnique(newEmployer, employerRepository.findAll())){
             employerRepository.save(newEmployer);
+        } else {
+            model.addAttribute("employers", employerRepository.findAll());
+
+            return "employers/index";
+        }
+
+
         return "redirect:";
     }
 

@@ -20,7 +20,7 @@ public class SkillController {
 
     @GetMapping("")
     public String index (Model model){
-        model.addAttribute("Skills", skillRepository.findAll());
+        model.addAttribute("skills", skillRepository.findAll());
 
         return "skills/index";
     }
@@ -39,8 +39,14 @@ public class SkillController {
         if (errors.hasErrors()) {
             return "skills/add";
         }
-        skillRepository.save(newSkill);
 
+        if (newSkill.isUnique(newSkill, skillRepository.findAll())){
+            skillRepository.save(newSkill);
+        } else {
+            model.addAttribute("skills", skillRepository.findAll());
+
+            return "skills/index";
+        }
         return "redirect:";
     }
 

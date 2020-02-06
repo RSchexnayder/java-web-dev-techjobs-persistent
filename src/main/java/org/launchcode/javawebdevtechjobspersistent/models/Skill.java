@@ -27,4 +27,13 @@ public class Skill extends AbstractEntity {
         return jobs;
     }
 
+    public boolean isUnique(Skill newSkill, Iterable<Skill> skills){
+        for (Skill skill : skills){
+            if (skill.getName().toLowerCase().equals(newSkill.getName().toLowerCase())){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }

@@ -1,7 +1,5 @@
 package org.launchcode.javawebdevtechjobspersistent.models;
 
-import org.launchcode.javawebdevtechjobspersistent.models.data.EmployerRepository;
-
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
@@ -37,14 +35,12 @@ public class Employer extends AbstractEntity {
         this.location = location;
     }
 
-    public List<String> getEmployerNames (){
-        EmployerRepository employerRepository = null;
-        Iterable<Employer> employerList = employerRepository.findAll();
-        List<String> employerNames = new ArrayList<>();
-        for (Employer employer : employerList) {
-            String employerName = employer.getName();
-            employerNames.add(employerName);
+    public boolean isUnique(Employer newEmployer, Iterable<Employer> employers){
+        for (Employer employer : employers){
+            if (employer.getName().toLowerCase().equals(newEmployer.getName().toLowerCase())){
+                return false;
+            }
         }
-        return employerNames;
+        return true;
     }
 }
